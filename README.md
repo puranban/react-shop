@@ -41,3 +41,14 @@ The project uses live API endpoints from dummyjson.com:
 
 - Create filter by method (no server side query needed)
 - Pagination (check if we can paginate the items and implement mechanism)
+
+## **Run Locally**
+- create env
+    - touch .env
+- Add API url in .env file
+    - REACT_APP_API_KEY=
+
+- Install dependencies
+    - yarn install
+- Start local development server
+    - yarn start
