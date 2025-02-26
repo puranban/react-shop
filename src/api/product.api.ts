@@ -2,8 +2,7 @@
 
 import { ProductsResponse, Product } from '../types/types';
 
-// NOTE: Do not use api url directly instead use dot file
-const BASE_URL = 'https://dummyjson.com/products';
+const BASE_URL = process.env.REACT_APP_API_KEY;
 
 interface Props {
     limit: number;
