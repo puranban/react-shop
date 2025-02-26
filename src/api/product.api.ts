@@ -2,6 +2,7 @@
 
 import { ProductsResponse, Product } from '../types/types';
 
+// NOTE: Do not use api url directly instead use dot file
 const BASE_URL = 'https://dummyjson.com/products';
 
 export const getAllProducts = async (): Promise<ProductsResponse> => {
