@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../api/product.api";
+import { ITEM_PER_PAGE } from "../constants";
 import { ProductsResponse } from "../types/types";
+import Pagination from "./Pagination";
 import TextOutput from "./TextOutput";
 
 const ProductList: React.FC = () => {
@@ -9,6 +11,7 @@ const ProductList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const navigate = useNavigate();
 
@@ -16,7 +19,10 @@ const ProductList: React.FC = () => {
     () => {
       const fetchProducts = async () => {
         try {
-          const data: ProductsResponse = await getAllProducts();
+          const data: ProductsResponse = await getAllProducts({
+            limit: ITEM_PER_PAGE,
+            skip: (currentPage - 1) * ITEM_PER_PAGE,
+          });
           setProductsList(data);
           setLoading(false);
         } catch (err) {
@@ -26,7 +32,7 @@ const ProductList: React.FC = () => {
       };
 
       fetchProducts();
-    }, [],
+    }, [currentPage],
   );
 
   const handleProductClick = useCallback(
@@ -85,6 +91,11 @@ const ProductList: React.FC = () => {
           </li>
         ))}
       </ul>
+      <Pagination
+        total={productsList?.total ?? 0}
+        currentPage={currentPage}
+        onChangePagination={setCurrentPage}
+      />
     </div>
   );
 };
