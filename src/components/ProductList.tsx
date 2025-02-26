@@ -25,6 +25,7 @@ const ProductList: React.FC = () => {
           });
           setProductsList(data);
           setLoading(false);
+          setError(null);
         } catch (err) {
           setError("Failed to fetch products");
           setLoading(false);

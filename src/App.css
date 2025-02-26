@@ -74,6 +74,54 @@ body, #root {
       }
     }
   }
+
+  /* Products details styling */
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1.5rem;
+      text-align: justify;
+      color: #333;
+    }
+
+    .thumbnail-image {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    h4 {
+      font-size: 1.12rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .product-image {
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      margin: 7px;
+    }
+  }
 }
 
 /* Text component styling */
