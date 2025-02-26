@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../api/product.api";
 import { ITEM_PER_PAGE } from "../constants";
+import { useDebounce } from "../hooks";
 import { ProductsResponse } from "../types/types";
 import Pagination from "./Pagination";
 import TextOutput from "./TextOutput";
@@ -14,6 +15,7 @@ const ProductList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const navigate = useNavigate();
+  const debouncedSearchValue = useDebounce(search, 300);
 
   useEffect(
     () => {
@@ -52,9 +54,9 @@ const ProductList: React.FC = () => {
 
   const filteredProducts = useMemo(
     () => productsList?.products?.filter(
-      (product) => product.title.toLowerCase().includes(search.toLowerCase())
+      (product) => product.title.toLowerCase().includes(debouncedSearchValue.toLowerCase())
     ) || [],
-    [productsList?.products, search],
+    [productsList?.products, debouncedSearchValue],
   );
 
   if (loading) return <div>Loading...</div>;
