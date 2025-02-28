@@ -33,7 +33,6 @@ const ProductDetails: React.FC = () => {
   return (
     <div className="product-details">
       <h2>Product item</h2>
-
       { error && <div>{error}</div> }
       {!product && <div>Product not found</div> }
       {product && (
