@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllProducts } from "../api/product.api";
 import { ITEM_PER_PAGE } from "../constants";
-import { useDebounce } from "../hooks";
+import { useDebounce } from "../hooks/useDebounce";
 import { ProductsResponse } from "../types/types";
 import Pagination from "./Pagination";
 import TextOutput from "./TextOutput";
@@ -64,35 +64,38 @@ const ProductList: React.FC = () => {
   return (
     <div className="product-list">
       <h2>Product List</h2>
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search product name..."
-        value={search}
-        onChange={handleSearchChange}
-      />
       { error && <div> { error } </div> }
       <ul className="list">
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search product name..."
+          value={search}
+          onChange={handleSearchChange}
+        />
         { filteredProducts?.length === 0 && <div> No Products Found </div> }
-        { filteredProducts?.map((product) => (
-          <li
-            className="item"
-            key={product.id}
-            onClick={() => handleProductClick(product.id)}
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-            />
-            <div className="item-info">
-              <TextOutput label={product.title} />
-              <TextOutput value={product.price} />
-              <TextOutput value={product.brand} />
-              <TextOutput label="Rating:" value={product.rating} />
-              <TextOutput label="Stock:" value={product.stock} />
-            </div>
-          </li>
-        ))}
+        <div className="card">
+          { filteredProducts?.map((product) => (
+            <li
+              className="item"
+              key={product.id}
+              onClick={() => handleProductClick(product.id)}
+            >
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+              />
+              <div className="item-info">
+                <TextOutput label={product.title} />
+                <TextOutput label="$" value={product.price} />
+                <TextOutput label="Category:" value={product.category} />
+                <TextOutput label="Brand" value={product.brand} />
+                <TextOutput label="Rating:" value={product.rating} />
+                <TextOutput label="Stock:" value={product.stock > 0 ? product.stock : "out of stock"} />
+              </div>
+            </li>
+          ))}
+        </div>
       </ul>
       <Pagination
         total={productsList?.total ?? 0}

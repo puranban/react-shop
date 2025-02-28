@@ -45,11 +45,11 @@ const ProductDetails: React.FC = () => {
           />
           <div className="product-title">{product.title}</div>
           <TextOutput value={product.description} />
-          <TextOutput label="Price:" value={product.price} />
-          <TextOutput label="Brand:" value={product.brand} />
+          <TextOutput label="$" value={product.price} />
           <TextOutput label="Category:" value={product.category} />
-          <TextOutput  label="Rating:" value={product.rating} />
-          <TextOutput label="Stock:" value={product.stock > 0 ? product.stock : "Not Available"} />
+          <TextOutput label="Brand" value={product.brand} />
+          <TextOutput label="Rating:" value={product.rating} />
+          <TextOutput label="Stock:" value={product.stock > 0 ? product.stock : "out of stock"} />
           <div>
             <h4>Images:</h4>
             {product.images.map((image, index) => (

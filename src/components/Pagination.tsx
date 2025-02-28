@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { ITEM_PER_PAGE } from "../constants";
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = (props: Props) => {
-
   const {
     total,
     currentPage,
@@ -28,6 +27,22 @@ const Pagination: React.FC<Props> = (props: Props) => {
   const handleNextPage = useCallback(
     () => onChangePagination((prev) => Math.min(prev + 1, totalPages)),
     [totalPages, onChangePagination],
+  );
+
+  useEffect(
+    () => {
+      try {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      } catch (error) {
+        // fallback
+        window.scrollTo(0, 0);
+      }
+    },
+    [currentPage],
   );
 
   return (
