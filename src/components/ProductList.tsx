@@ -89,9 +89,11 @@ const ProductList: React.FC = () => {
                 <TextOutput label={product.title} />
                 <TextOutput label="$" value={product.price} />
                 <TextOutput label="Category:" value={product.category} />
-                <TextOutput label="Brand" value={product.brand} />
+                <TextOutput label="Brand:" value={product.brand} />
                 <TextOutput label="Rating:" value={product.rating} />
-                <TextOutput label="Stock:" value={product.stock > 0 ? product.stock : "out of stock"} />
+                <TextOutput label="Stock:" value={product.stock} />
+                <TextOutput label="Availability Status:" value={product.availabilityStatus} />
+                <TextOutput label="Minimum Order Quantity:" value={product.minimumOrderQuantity} />
               </div>
             </li>
           ))}
